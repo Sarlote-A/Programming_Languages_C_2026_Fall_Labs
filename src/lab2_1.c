@@ -13,16 +13,35 @@
 
 int sum_to_n(int n) {
     // TODO: implement sum with a for loop
-    return 0; // placeholder
+    // int a;
+    int sum = 0;
+    int b;
+        for (int a=0; a<n; a++){
+            printf("Enter the integer: ");
+            scanf("%d", &b);
+            sum = sum + b;
+        }
+
+    // printf(sum);
+
+    return sum; // placeholder
 }
 
 int main(void) {
-    int n;
+    int n; 
+    int c;
 
     printf("Enter a positive integer n: ");
     scanf("%d", &n);
+    while (n<1){
+        printf("The value is too small. Enter the next value: ");
+        scanf("%d", &n);
+    }
 
     // TODO: validate input, call function, and print result
+    c = sum_to_n(n);
+    printf("The result of function is: ");
+    printf("%d", c);
 
     return 0;
 }
