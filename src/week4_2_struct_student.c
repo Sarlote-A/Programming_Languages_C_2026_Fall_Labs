@@ -1,7 +1,7 @@
 /*
  * week4_2_struct_student.c
- * Author: [Your Name]
- * Student ID: [Your ID]
+ * Author: Džoanna Šarlote Akselrode
+ * Student ID: 251RDC072
  * Description:
  *   Demonstrates defining and using a struct in C.
  *   Define a 'Student' struct with name, id and grade, create two
@@ -14,23 +14,26 @@
 #include <stdio.h>
 #include <string.h>
 
-// TODO: Define struct Student with fields: name (char[50]), id (int), grade (float)
-// Example:
-// struct Student {
-//     char name[50];
-//     int id;
-//     float grade;
-// };
+struct Student {
+    char name[50];
+    int id;
+    float grade;
+};
 
 int main(void) {
-    // TODO: Declare two Student variables
+    struct Student a, b;
 
-    // TODO: Assign the values (use strcpy for the name):
-    //       Student 1: Alice Johnson, 1001, 9.1
-    //       Student 2: Bob Smith,     1002, 8.7
+    /* can't assign a string to a char array with =, so use strcpy */
+    strcpy(a.name, "Alice Johnson");
+    a.id = 1001;
+    a.grade = 9.1f;
 
-    // TODO: Print each student exactly as:
-    //       Student <k>: <name>, ID: <id>, Grade: <grade with 1 decimal, %.1f>
+    strcpy(b.name, "Bob Smith");
+    b.id = 1002;
+    b.grade = 8.7f;
+
+    printf("Student 1: %s, ID: %d, Grade: %.1f\n", a.name, a.id, a.grade);
+    printf("Student 2: %s, ID: %d, Grade: %.1f\n", b.name, b.id, b.grade);
 
     return 0;
 }

@@ -1,7 +1,7 @@
 /*
  * week4_3_struct_database.c
- * Author: [Your Name]
- * Student ID: [Your ID]
+ * Author: Džoanna Šarlote Akselrode
+ * Student ID: 251RDC072
  * Description:
  *   Simple in-memory "database" using an array of structs.
  *   Use malloc to allocate space for n Student records,
@@ -14,14 +14,16 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 
-// TODO: Define struct Student with fields name (char[50]), id (int), grade (float)
-//       (same definition as in Task 2)
+struct Student {
+    char name[50];
+    int id;
+    float grade;
+};
 
 int main(void) {
-    int n;
-    struct Student *students = NULL;
+    int n, i;
+    struct Student *list;
 
     printf("Enter number of students: ");
     if (scanf("%d", &n) != 1 || n <= 0) {
@@ -29,28 +31,28 @@ int main(void) {
         return 1;
     }
 
-    // TODO: Allocate memory for n Student structs using malloc
-    //       Example: students = malloc(n * sizeof(struct Student));
+    list = malloc(n * sizeof(struct Student));
+    if (list == NULL) {
+        printf("Memory allocation failed.\n");
+        return 1;
+    }
 
-    // TODO: Check allocation success
-    // If students is NULL: print "Memory allocation failed." and return 1
+    for (i = 0; i < n; i++) {
+        printf("Enter data for student %d: ", i + 1);
+        /* %49s so a long name can't overflow name[50] */
+        if (scanf("%49s %d %f", list[i].name, &list[i].id, &list[i].grade) != 3) {
+            printf("Invalid input.\n");
+            free(list);
+            return 1;
+        }
+    }
 
-    // TODO: Read student data in a loop. For student i (counting from 1):
-    //       print "Enter data for student %d: ", then read
-    //       name (scanf("%49s", ...)), id and grade.
-    //       If a value cannot be read: print "Invalid input.",
-    //       free the array and return 1
+    printf("\n");
+    printf("%-6s %-11s %s\n", "ID", "Name", "Grade");
+    for (i = 0; i < n; i++) {
+        printf("%-6d %-11s %.1f\n", list[i].id, list[i].name, list[i].grade);
+    }
 
-    // TODO: Print an empty line, then the table:
-    //       printf("%-6s %-11s %s\n", "ID", "Name", "Grade");
-    //       and for each student:
-    //       printf("%-6d %-11s %.1f\n", id, name, grade);
-
-    // Optional (not autograded): after the table, print the average
-    // grade or the top student
-
-    // TODO: Free allocated memory
-    (void)students;  // remove this line once you use students
-
+    free(list);
     return 0;
 }
